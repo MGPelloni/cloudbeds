@@ -27,8 +27,8 @@ define('CLOUDBEDS_DATA_KEYS', [
     'cloudbeds_access_token', 
     'cloudbeds_access_token_timestamp', 
     'cloudbeds_refresh_token',
-    'cloudbeds_status',
-    'cloudbeds_data_key'
+    'cloudbeds_data_key',
+    'cloudbeds_status'
 ]);
 
 // Functions
