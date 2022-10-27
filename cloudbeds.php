@@ -34,6 +34,7 @@ define('CLOUDBEDS_DATA_KEYS', [
 
 // Functions
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/admin.php');
+require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/api.php');
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/cloudbeds.php');
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/functions.php');
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/routes.php');
@@ -64,4 +65,3 @@ register_deactivation_hook(__FILE__, 'cloudbeds_deactivate');
 // Filters
 add_filter('cron_schedules', 'cloudbeds_cron_schedules');
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'cloudbeds_action_links' );
-

@@ -155,6 +155,11 @@ function cloudbeds_import_data($target_site = null, $key = null) {
     return $res;
 }
 
+/**
+ * Connects the form data set in the sync administration panel to the target website.
+ *
+ * @return void
+ */
 function cloudbeds_sync_connect() {
     if (empty($_POST['target_website']) || empty($_POST['data_key']) ) {
         return false;
