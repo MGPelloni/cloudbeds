@@ -107,13 +107,14 @@ function cloudbeds_auth() {
  * @return void
  */
 function cloudbeds_data() {
-    $data = cloudbeds_option_data();
-
     if (empty($_GET['key'])) {
         wp_send_json_error(new WP_Error('500', 'Missing key.'));
     }
 
-    if ($_GET['key'] !== $data['cloudbeds_access_token']) {
+    $key = filter_var($_GET['key'], FILTER_SANITIZE_STRING);
+    $data = cloudbeds_option_data();
+
+    if ($key !== $data['cloudbeds_data_key']) {
         wp_send_json_error(new WP_Error('500', 'Incorrect key value.'));
     }
 

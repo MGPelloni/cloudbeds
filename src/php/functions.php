@@ -49,6 +49,8 @@ function cloudbeds_activate() {
     if ( ! wp_next_scheduled('cloudbeds_cron') ) {
         wp_schedule_event(time(), 'thirty_minutes', 'cloudbeds_cron');
     }
+
+    cloudbeds_set_option('cloudbeds_data_key', wp_generate_password(30, false));
 }
 
 /**
@@ -92,4 +94,27 @@ function cloudbeds_action_links($actions) {
     return array_merge([
         '<a href="' . CLOUDBEDS_ADMIN_URL . '">Settings</a>',
     ], $actions);
+}
+
+/**
+ * Import data from a website that has the Cloudbeds plugin installed.
+ * Primarily utilized for local development.
+ *
+ * @param string $target_site The target website.
+ * @param string $key The Cloudbeds access token located on the target website's Cloudbeds dashboard.
+ * @return void
+ */
+function cloudbeds_import_data($target_site, $key) {
+    $endpoint = "$target_site/wp-json/cloudbeds/data";
+    $query = http_build_query([
+        'key' => $key
+    ]);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $endpoint . '?' .  $query);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $res = json_decode(curl_exec($ch), true);
+    curl_close($ch);
+
+    return $res;
 }
