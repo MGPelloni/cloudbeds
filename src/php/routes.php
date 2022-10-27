@@ -25,6 +25,18 @@ function cloudbeds_route_auth(){
 }
 
 /**
+ * Registers an REST route to access Cloudbeds data via API key.
+ *
+ * @return void
+ */
+function cloudbeds_route_data(){
+    register_rest_route( 'cloudbeds', '/data/', array(
+        'methods' => 'GET',
+        'callback' => 'cloudbeds_data',
+    ));
+}
+
+/**
  * Callback function for /wp-json/cloudbeds/connect/ route.
  * 
  * Registers the Client ID and Secret to the WordPress database. Once logged, the user is forwarded
@@ -85,5 +97,26 @@ function cloudbeds_auth() {
     cloudbeds_set_option('cloudbeds_authorization_code', $code);
     cloudbeds_set_option('cloudbeds_status', 'Connected');
     wp_redirect(CLOUDBEDS_ADMIN_URL);
+    exit;
+}
+
+/**
+ * Callback function for /wp-json/cloudbeds/data/ route.
+ * Returns all Cloudbeds data.
+ *
+ * @return void
+ */
+function cloudbeds_data() {
+    $data = cloudbeds_option_data();
+
+    if (empty($_GET['key'])) {
+        wp_send_json_error(new WP_Error('500', 'Missing key.'));
+    }
+
+    if ($_GET['key'] !== $data['cloudbeds_access_token']) {
+        wp_send_json_error(new WP_Error('500', 'Incorrect key value.'));
+    }
+
+    echo json_encode($data); 
     exit;
 }

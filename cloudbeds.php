@@ -53,6 +53,7 @@ add_action('admin_init', 'cloudbeds_admin_register_settings');
 // Hooks [WordPress REST API]
 add_action('rest_api_init', 'cloudbeds_route_connect');
 add_action('rest_api_init', 'cloudbeds_route_auth');
+add_action('rest_api_init', 'cloudbeds_route_data');
 
 // Hooks [Activation, Deactivation]
 register_activation_hook(__FILE__, 'cloudbeds_activate');
