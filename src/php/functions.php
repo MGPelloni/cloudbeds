@@ -134,13 +134,22 @@ function cloudbeds_import_data($target_site = null, $key = null) {
     if (!$res['cloudbeds_client_id']) {
         return false;
     } else {
-        cloudbeds_set_option('cloudbeds_client_id', $res['cloudbeds_client_id']);
-        cloudbeds_set_option('cloudbeds_client_secret', $res['cloudbeds_client_secret']);
-        cloudbeds_set_option('cloudbeds_authorization_code', $res['cloudbeds_authorization_code']);
-        cloudbeds_set_option('cloudbeds_access_token', $res['cloudbeds_access_token']);
-        cloudbeds_set_option('cloudbeds_access_token_timestamp', $res['cloudbeds_access_token_timestamp']);
-        cloudbeds_set_option('cloudbeds_refresh_token', $res['cloudbeds_refresh_token']);
-        cloudbeds_set_option('cloudbeds_status', 'Syncing to Production');    
+        $data = cloudbeds_option_data();
+
+        // Check to ensure the production site has retreived a new access token before syncing or that the token has yet to exist locally
+        if ($data['cloudbeds_access_token'] !== $res['cloudbeds_access_token'] || !$data['cloudbeds_access_token']) {
+            // A new access token is available, sync all data
+            cloudbeds_set_option('cloudbeds_client_id', $res['cloudbeds_client_id']);
+            cloudbeds_set_option('cloudbeds_client_secret', $res['cloudbeds_client_secret']);
+            cloudbeds_set_option('cloudbeds_authorization_code', $res['cloudbeds_authorization_code']);
+            cloudbeds_set_option('cloudbeds_access_token', $res['cloudbeds_access_token']);
+            cloudbeds_set_option('cloudbeds_access_token_timestamp', $res['cloudbeds_access_token_timestamp']);
+            cloudbeds_set_option('cloudbeds_refresh_token', $res['cloudbeds_refresh_token']);
+            cloudbeds_set_option('cloudbeds_status', 'Syncing to Production');    
+        } else {
+            // The target site still has the old access token, push the timestamp out and sync later
+            cloudbeds_set_option('cloudbeds_access_token_timestamp', intval($data['cloudbeds_access_token_timestamp']) + 1800);
+        }
     }
 
     return $res;
