@@ -29,10 +29,11 @@ $data = cloudbeds_option_data();
             </div>
             <div class="cloudbeds-info">
                 <?php switch ($data['cloudbeds_status']) {
+                    case 'Syncing to Production':
                     case 'Connected':
                         $time_left = ceil(((intval($data['cloudbeds_access_token_timestamp']) + 1800) - time()) / 60);
                         ?>
-                        <h2>Status: ✅ Connected</h2>
+                        <h2>Status: ✅ <?= $data['cloudbeds_status'] ?></h2>
                         <p>Your website is connected to Cloudbeds and is receiving information from the server. You can use blocks to display information from Cloudbeds by searching <code>Cloudbeds</code> in the block editor.</p>
                         <p>The next refresh will happen in <?= esc_html($time_left) ?> minutes.</p>
                         <table class="widefat fixed" cellspacing="0">
@@ -71,6 +72,7 @@ $data = cloudbeds_option_data();
                             <li><code>Redirect URI: <?= esc_url(rest_url('/cloudbeds/auth')) ?></code></li>
                         </ul>
                         <p>Once complete, enter in the <code>Client ID</code> and <code>Client Secret</code> values into the form on this page and submit to connect your website to Cloudbeds.</p>
+                        <p>If you're working in a local or staging environment, you can <a href="<?= esc_url(CLOUDBEDS_ADMIN_SYNC_URL) ?>">sync your data</a> to the production environment using a data key.</p>
                         <?php
                         break;
                 } ?>

@@ -8,10 +8,17 @@
 function cloudbeds_check_access_token() {
     $data = cloudbeds_option_data();
 
-    // Check if a new access token is needed
-    if ($data['cloudbeds_client_id'] && $data['cloudbeds_client_secret'] && $data['cloudbeds_authorization_code'] && $data['cloudbeds_status'] == "Connected") {
-        if (!$data['cloudbeds_access_token'] || time() > intval($data['cloudbeds_access_token_timestamp']) + 1800) {
-            cloudbeds_get_access_token($data['cloudbeds_client_id'], $data['cloudbeds_client_secret'], $data['cloudbeds_authorization_code']);
+    if ($data['cloudbeds_status'] == "Connected") {
+        // Check if a new access token is needed
+        if ($data['cloudbeds_client_id'] && $data['cloudbeds_client_secret'] && $data['cloudbeds_authorization_code']) {
+            if (!$data['cloudbeds_access_token'] || time() > intval($data['cloudbeds_access_token_timestamp']) + 1800) {
+                cloudbeds_get_access_token($data['cloudbeds_client_id'], $data['cloudbeds_client_secret'], $data['cloudbeds_authorization_code']);
+            }
+        }
+    } else if ($data['cloudbeds_status'] == "Syncing to Production") {
+        // Non-production env sync
+        if (time() > intval($data['cloudbeds_access_token_timestamp']) + 1800) {
+            cloudbeds_import_data();
         }
     }
 }

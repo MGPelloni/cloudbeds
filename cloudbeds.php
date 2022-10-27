@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define('CLOUDBEDS_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 define('CLOUDBEDS_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 define('CLOUDBEDS_ADMIN_URL', get_admin_url(null, '/options-general.php?page=cloudbeds'));
+define('CLOUDBEDS_ADMIN_SYNC_URL', get_admin_url(null, '/options-general.php?page=cloudbeds-sync'));
 define('CLOUDBEDS_DATA_KEYS', [
     'cloudbeds_client_id', 
     'cloudbeds_client_secret', 

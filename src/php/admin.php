@@ -18,6 +18,7 @@ function cloudbeds_admin_styles() {
  */
 function cloudbeds_admin_custom_menu() {
     add_submenu_page('options-general.php', 'Cloudbeds', 'Cloudbeds', 'manage_options', 'cloudbeds', 'cloudbeds_admin_options_page', 58);
+    add_submenu_page(null, 'Cloudbeds Sync', null, 'manage_options', 'cloudbeds-sync', 'cloudbeds_admin_sync_page', 58);
 }
 
 /**
@@ -28,6 +29,16 @@ function cloudbeds_admin_custom_menu() {
  */
 function cloudbeds_admin_options_page() {
     require_once(CLOUDBEDS_PLUGIN_PATH . 'src/templates/admin.php');
+}
+
+/**
+ * Callback function for the sync page.
+ * 
+ * @link https://codex.wordpress.org/Creating_Options_Pages
+ * @return void
+ */
+function cloudbeds_admin_sync_page() {
+    require_once(CLOUDBEDS_PLUGIN_PATH . 'src/templates/sync.php');
 }
 
 /**

@@ -100,13 +100,26 @@ function cloudbeds_action_links($actions) {
 
 /**
  * Import data from a website that has the Cloudbeds plugin installed.
- * Primarily utilized for local development.
+ * Primarily utilized for local and staging environments.
  *
  * @param string $target_site The target website.
  * @param string $key The Cloudbeds access token located on the target website's Cloudbeds dashboard.
  * @return void
  */
-function cloudbeds_import_data($target_site, $key) {
+function cloudbeds_import_data($target_site = null, $key = null) {
+    if (!$target_site && !get_option('cloudbeds_sync_website')) {
+        return 'Missing target site.';
+    } else if (get_option('cloudbeds_sync_website')) {
+        $target_site = get_option('cloudbeds_sync_website');
+    }
+
+    if (!$key && !get_option('cloudbeds_sync_key')) {
+        return 'Missing key.';
+    } else if (get_option('cloudbeds_sync_key')) {
+        $key = get_option('cloudbeds_sync_key');
+    }
+
+
     $endpoint = "$target_site/wp-json/cloudbeds/data";
     $query = http_build_query([
         'key' => $key
@@ -118,5 +131,45 @@ function cloudbeds_import_data($target_site, $key) {
     $res = json_decode(curl_exec($ch), true);
     curl_close($ch);
 
+    if (!$res['cloudbeds_client_id']) {
+        return false;
+    } else {
+        cloudbeds_set_option('cloudbeds_client_id', $res['cloudbeds_client_id']);
+        cloudbeds_set_option('cloudbeds_client_secret', $res['cloudbeds_client_secret']);
+        cloudbeds_set_option('cloudbeds_authorization_code', $res['cloudbeds_authorization_code']);
+        cloudbeds_set_option('cloudbeds_access_token', $res['cloudbeds_access_token']);
+        cloudbeds_set_option('cloudbeds_access_token_timestamp', $res['cloudbeds_access_token_timestamp']);
+        cloudbeds_set_option('cloudbeds_refresh_token', $res['cloudbeds_refresh_token']);
+        cloudbeds_set_option('cloudbeds_status', 'Syncing to Production');    
+    }
+
     return $res;
+}
+
+function cloudbeds_sync_connect() {
+    if (empty($_POST['target_website']) || empty($_POST['data_key']) ) {
+        return false;
+    }
+
+    $website = filter_var($_POST['target_website'], FILTER_SANITIZE_STRING); 
+    $key = filter_var($_POST['data_key'], FILTER_SANITIZE_STRING);
+
+    if (filter_var($website, FILTER_VALIDATE_URL) == false) {
+        return 'Website URL is incorrectly formed. Enter in the Site Address (URL) located under the target website general WordPress settings.';
+    }
+    
+    $website = rtrim($website, "/");
+
+    // Both website and key are present, attempt to connect
+    $data = cloudbeds_import_data($website, $key);
+
+    if ($data['cloudbeds_client_id']) {
+        cloudbeds_set_option('cloudbeds_sync_website', $website);
+        cloudbeds_set_option('cloudbeds_sync_key', $key);
+        cloudbeds_set_option('cloudbeds_status', 'Syncing to Production');
+        wp_redirect(CLOUDBEDS_ADMIN_URL);
+    } else {
+        cloudbeds_set_option('cloudbeds_status', 'Not Connected'); 
+        return "Sync failed, double check the data key and website URL.";
+    }
 }
