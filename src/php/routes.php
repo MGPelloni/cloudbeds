@@ -8,6 +8,7 @@ function cloudbeds_route_connect(){
     register_rest_route( 'cloudbeds', '/connect/', array(
         'methods' => 'POST',
         'callback' => 'cloudbeds_connect',
+        'permission_callback' => '__return_true'
     ));
 }
 
@@ -21,6 +22,7 @@ function cloudbeds_route_auth(){
     register_rest_route( 'cloudbeds', '/auth/', array(
         'methods' => 'GET',
         'callback' => 'cloudbeds_auth',
+        'permission_callback' => '__return_true'
     ));
 }
 
@@ -33,6 +35,7 @@ function cloudbeds_route_data(){
     register_rest_route( 'cloudbeds', '/data/', array(
         'methods' => 'GET',
         'callback' => 'cloudbeds_data',
+        'permission_callback' => '__return_true'
     ));
 }
 
