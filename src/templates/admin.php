@@ -34,7 +34,7 @@ $data = cloudbeds_option_data();
                         $time_left = ceil(((intval($data['cloudbeds_access_token_timestamp']) + 1800) - time()) / 60);
                         ?>
                         <h2>Status: ✅ <?= $data['cloudbeds_status'] ?></h2>
-                        <p>Your website is connected to Cloudbeds and is receiving information from the server. You can use blocks to display information from Cloudbeds by searching <code>Cloudbeds</code> in the block editor.</p>
+                        <p>Your website is connected to Cloudbeds and is receiving information from the server. You can now use the functions <code>cloudbeds_api_get</code> and <code>cloudbeds_api_post</code> to interact with the <a href="https://hotels.cloudbeds.com/api/docs/">Cloudbeds API</a>.</p>
                         <p>The next refresh will happen in <?= esc_html($time_left) ?> minutes.</p>
                         <table class="widefat fixed" cellspacing="0">
                             <thead>
