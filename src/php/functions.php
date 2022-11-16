@@ -125,7 +125,14 @@ function cloudbeds_import_data($target_site = null, $key = null) {
     ]);
 
     $endpoint = "$target_site/wp-json/cloudbeds/data?$query";
-    $res = json_decode(wp_remote_get($endpoint));
+
+    $res = wp_remote_get($endpoint);
+
+    if (is_wp_error($res)) {
+        return false;
+    } else if ($res) {
+        $res = json_decode(wp_remote_retrieve_body($res), true);
+    }
 
     if (!$res['cloudbeds_client_id']) {
         return false;
