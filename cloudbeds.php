@@ -1,15 +1,16 @@
 <?php
 /*
 Plugin Name: Cloudbeds
-Plugin URI:  https://cacheinteractive.com/cloudbeds/
+Plugin URI:  https://marcopelloni.com/cloudbeds/
 Description: WordPress integration utilizing the Cloudbeds API.
 Version:     1.0.0
-Author:      Cache Interactive
-Author URI:  https://cacheinteractive.com/
-License:     GPL2
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Domain Path: /languages
-Text Domain: my-toolset
+Author:      Marco Pelloni
+Author URI:  https://marcopelloni.com/
+License:     GPL3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+
+Version number is automatically adjusted by semantic-release-bot on release, do not adjust manually:
+Version: 1.0.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -65,3 +66,13 @@ register_deactivation_hook(__FILE__, 'cloudbeds_deactivate');
 // Filters
 add_filter('cron_schedules', 'cloudbeds_cron_schedules');
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'cloudbeds_action_links' );
+
+// Updates
+require_once(CLOUDBEDS_PLUGIN_PATH . 'lib/plugin-update-checker-5.0/plugin-update-checker.php');
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://marcopelloni.com/releases/cloudbeds.json',
+	__FILE__,
+	'cloudbeds'
+);

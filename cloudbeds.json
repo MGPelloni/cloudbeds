@@ -1,0 +1,11 @@
+{
+	"name": "Cloudbeds",
+	"version": "1.0.0",
+	"download_url": "https://marcopelloni.com/releases/cloudbeds.zip",
+	"homepage": "https://marcopelloni.com/cloudbeds/",
+	"author": "Marco Pelloni",
+	"sections" : {
+		"description" : "WordPress integration utilizing the Cloudbeds API."
+	},
+	"author_homepage": "https://marcopelloni.com/"
+}
