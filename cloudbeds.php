@@ -3,7 +3,6 @@
 Plugin Name: Cloudbeds
 Plugin URI:  https://marcopelloni.com/cloudbeds/
 Description: WordPress integration utilizing the Cloudbeds API.
-Version:     1.0.0
 Author:      Marco Pelloni
 Author URI:  https://marcopelloni.com/
 License:     GPL3
