@@ -120,16 +120,12 @@ function cloudbeds_import_data($target_site = null, $key = null) {
     }
 
 
-    $endpoint = "$target_site/wp-json/cloudbeds/data";
     $query = http_build_query([
         'key' => $key
     ]);
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $endpoint . '?' .  $query);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $res = json_decode(curl_exec($ch), true);
-    curl_close($ch);
+    $endpoint = "$target_site/wp-json/cloudbeds/data?$query";
+    $res = json_decode(wp_remote_get($endpoint));
 
     if (!$res['cloudbeds_client_id']) {
         return false;
@@ -161,12 +157,17 @@ function cloudbeds_import_data($target_site = null, $key = null) {
  * @return void
  */
 function cloudbeds_sync_connect() {
-    if (empty($_POST['target_website']) || empty($_POST['data_key']) ) {
+    if (empty($_POST['target_website']) || empty($_POST['data_key'] || empty($_POST['_wpnonce'])) ) {
         return false;
     }
 
     $website = filter_var($_POST['target_website'], FILTER_SANITIZE_STRING); 
     $key = filter_var($_POST['data_key'], FILTER_SANITIZE_STRING);
+    $nonce = filter_var($_POST['_wpnonce'], FILTER_SANITIZE_STRING);
+
+    if (!wp_verify_nonce($nonce, 'cloudbeds_sync')) {
+        return 'Invalid nonce.';
+    }
 
     if (filter_var($website, FILTER_VALIDATE_URL) == false) {
         return 'Website URL is incorrectly formed. Enter in the Site Address (URL) located under the target website general WordPress settings.';
@@ -182,6 +183,7 @@ function cloudbeds_sync_connect() {
         cloudbeds_set_option('cloudbeds_sync_key', $key);
         cloudbeds_set_option('cloudbeds_status', 'Syncing to Production');
         wp_redirect(CLOUDBEDS_ADMIN_URL);
+        exit;
     } else {
         cloudbeds_set_option('cloudbeds_status', 'Not Connected'); 
         return "Sync failed, double check the data key and website URL.";

@@ -82,36 +82,28 @@ function cloudbeds_get_access_token() {
         ];        
     }
 
-    $endpoint = 'https://hotels.cloudbeds.com/api/v1.1/access_token';
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $endpoint);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
     if ($token['grant_type'] == 'refresh_token') {
-        curl_setopt($ch, CURLOPT_POSTFIELDS, [
+        $args = [
             'client_id' => $data['cloudbeds_client_id'],
             'client_secret' => $data['cloudbeds_client_secret'],
             'refresh_token' => $token['code'],
             'grant_type' => $token['grant_type'],
             'redirect_uri' => rest_url('/cloudbeds/auth'),
-        ]);    
+        ];
     } else {
-        curl_setopt($ch, CURLOPT_POSTFIELDS, [
+        $args = [
             'client_id' => $data['cloudbeds_client_id'],
             'client_secret' => $data['cloudbeds_client_secret'],
             'code' => $token['code'],
             'grant_type' => $token['grant_type'],
             'redirect_uri' => rest_url('/cloudbeds/auth'),
-        ]);    
+        ];
     }
 
-    $res = json_decode(curl_exec($ch), true);
-    curl_close($ch);
+    $res = cloudbeds_api_post('access_token', $args);
 
     if ( defined( 'WP_CLI' ) && WP_CLI ) {
-        WP_CLI::log(json_encode($res));
+        WP_CLI::log(wp_json_encode($res));
     }
 
     if ($res['error_description']) {

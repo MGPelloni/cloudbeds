@@ -13,22 +13,23 @@ function cloudbeds_api_get($path = '', $args = []) {
     $endpoint = "https://hotels.cloudbeds.com/api/v1.1/$path";
     $token = get_option('cloudbeds_access_token');
 
-    if ($token) {
+    if ($token) { 
         if ($args) {
-            $endpoint .= '?' . http_build_query($args);
+            $endpoint .= "?" . http_build_query($args);
         }
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $endpoint);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: " . $token
-        ));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $res = json_decode(curl_exec($ch), true);
-        curl_close($ch);
+        $res = wp_remote_get($endpoint, [
+            'headers' => "Authorization: " . $token,
+        ]);  
         
-        if ($res['success']) {
-            return $res['data'];
+        if (is_wp_error($res)) {
+            return false;
+        }
+        
+        $res_body = json_decode(wp_remote_retrieve_body($res), true);
+
+        if ($res_body['success']) {
+            return $res_body['data'];
         }
     }
 
@@ -49,21 +50,17 @@ function cloudbeds_api_post($path = '', $args = []) {
     $token = get_option('cloudbeds_access_token');
 
     if ($token) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $endpoint);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: " . $token
-        ));
-
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);    
-
-        $res = json_decode(curl_exec($ch), true);
-        curl_close($ch);
+        $args['headers'] = "Authorization: " . $token;
+        $res = wp_remote_post($endpoint, $args);  
         
-        if ($res['success']) {
-            return $res['data'];
+        if (is_wp_error($res)) {
+            return false;
+        }
+        
+        $res_body = json_decode(wp_remote_retrieve_body($res), true);
+
+        if ($res_body['success']) {
+            return $res_body['data'];
         }
     }
 

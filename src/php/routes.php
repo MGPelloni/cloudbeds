@@ -121,6 +121,6 @@ function cloudbeds_data() {
         wp_send_json_error(new WP_Error('500', 'Incorrect key value.'));
     }
 
-    echo json_encode($data); 
+    echo wp_json_encode($data); 
     exit;
 }
