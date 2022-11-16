@@ -1,0 +1,69 @@
+{
+    "branches": [ "main" ],
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        [
+            "@google/semantic-release-replace-plugin",
+            {
+              "replacements": [
+                {
+                    "files": ["cloudbeds.json"],
+                    "from": "\"version\": \".*\"",
+                    "to": "\"version\": \"${nextRelease.version}\"",
+                    "results": [
+                      {
+                        "file": "cloudbeds.json",
+                        "hasChanged": true,
+                        "numMatches": 1,
+                        "numReplacements": 1
+                      }
+                    ],
+                    "countMatches": true
+                  },
+                {
+                  "files": ["cloudbeds.php"],
+                  "from": "Version: .*",
+                  "to": "Version: ${nextRelease.version}",
+                  "results": [
+                    {
+                      "file": "cloudbeds.php",
+                      "hasChanged": true,
+                      "numMatches": 1,
+                      "numReplacements": 1
+                    }
+                  ],
+                  "countMatches": true
+                }
+              ]
+            }
+        ],
+        [
+            "@semantic-release/changelog",
+            {
+                "changelogFile": "CHANGELOG.md",
+                "changelogTitle": "# Semantic Versioning Changelog"
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "CHANGELOG.md",
+                    "cloudbeds.php",
+                    "cloudbeds.json"
+                ]
+            }
+        ],
+        [
+          "@semantic-release/github",
+          {
+              "assets": [
+                  {
+                      "path": "release/**"
+                  }
+              ]
+          }
+      ]
+    ]
+}
