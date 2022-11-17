@@ -11,12 +11,13 @@ The Cloudbeds plugin allows users to connect their WordPress website to their Cl
 
 ## Installation
 
-Download the Cloudbeds plugin and install it on your WordPress site. Once the plugin is activated, API integration instructions are located in "Settings -> Cloudbeds" within the WordPress administration sidebar.
+[Download the Cloudbeds plugin](https://marcopelloni.com/releases/cloudbeds.zip) and install it on your WordPress site. Once the plugin is activated, navigate to "Settings -> Cloudbeds" within the WordPress administration bar. Follow the API integration instructions on the page to connect to Cloudbeds.
 
-After the integration is complete, developers can interact with the API utilizing `cloudbeds_api_get` and `cloudbeds_api_post`.
+After the integration is complete, developers can interact with the API utilizing `cloudbeds_api_get` and `cloudbeds_api_post` with the name of the endpoint as the first parameter. Additional arguments can be added as the second parameter. 
 
-```
-// @link https://hotels.cloudbeds.com/api/docs/#api-Room-getRoomTypes
+For example, you can utilize the `cloudbeds_api_get` function to retrieve and print [room types](https://hotels.cloudbeds.com/api/docs/#api-Room-getRoomTypes):
+
+```php
 $room_types = cloudbeds_api_get('getRoomTypes');
 
 if ($room_types) {
