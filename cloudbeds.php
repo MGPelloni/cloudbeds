@@ -31,10 +31,12 @@ define('CLOUDBEDS_DATA_KEYS', [
     'cloudbeds_data_key',
     'cloudbeds_status'
 ]);
+define('CLOUDBEDS_LOGS', CLOUDBEDS_PLUGIN_PATH . 'logs');
 
 // Functions
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/admin.php');
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/api.php');
+require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/cache.php');
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/cloudbeds.php');
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/functions.php');
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/routes.php');

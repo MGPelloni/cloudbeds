@@ -25,9 +25,15 @@ function cloudbeds_api_get($path = '', $args = []) {
         if (is_wp_error($res)) {
             return false;
         }
-        
-        $res_body = json_decode(wp_remote_retrieve_body($res), true);
 
+        // Check the cache for the response.
+        $cached_data = cloudbeds_cache_check($endpoint);
+        if ($cached_data) {
+            return json_decode($cached_data, true);
+        }
+
+        // The response is not cached or has expired, so we need to make a request.
+        $res_body = json_decode(wp_remote_retrieve_body($res), true);
         if ($res_body['success']) {
             return $res_body['data'];
         }

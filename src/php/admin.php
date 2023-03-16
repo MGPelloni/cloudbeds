@@ -52,3 +52,23 @@ function cloudbeds_admin_register_settings() {
         register_setting('cloudbeds', $key);
     }
 }
+
+/**
+ * Logs data to the logs folder.
+ *
+ * @param string $data The data to be logged.
+ * @return void
+ */
+function cloudbeds_log($data) {
+    $content = $data;
+    $date = date('mdy');
+    $path = CLOUDBEDS_LOGS . '/' . $date . '.txt';
+
+    if (!file_exists($path)) {
+        touch($path);
+    }
+
+    $file = fopen($path, "a") or die("Unable to open file!");
+    fwrite($file, $content . PHP_EOL);
+    fclose($file);
+}
