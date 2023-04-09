@@ -46,11 +46,11 @@ function cloudbeds_reset() {
  * @return void
  */
 function cloudbeds_activate() {
-    if ( ! wp_next_scheduled('cloudbeds_cron') ) {
+    if (!wp_next_scheduled('cloudbeds_cron')) {
         wp_schedule_event(time(), 'thirty_minutes', 'cloudbeds_cron');
     }
 
-    if (get_option('cloudbeds_data_key') !== false) {
+    if (!get_option('cloudbeds_data_key')) {
         cloudbeds_set_option('cloudbeds_data_key', wp_generate_password(30, false));
     }
 }
