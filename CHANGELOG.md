@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.2](https://github.com/MGPelloni/cloudbeds/compare/v1.2.1...v1.2.2) (2023-04-09)
+
+
+### Bug Fixes
+
+* incorrect operator for data key ([8322907](https://github.com/MGPelloni/cloudbeds/commit/83229075d8f0eaee0c30968b1d302a58dde911f2))
+
 ## [1.2.1](https://github.com/MGPelloni/cloudbeds/compare/v1.2.0...v1.2.1) (2023-04-09)
 
 
