@@ -27,14 +27,17 @@ function cloudbeds_api_get($path = '', $args = []) {
         }
 
         // Check the cache for the response.
-        $cached_data = cloudbeds_cache_check($endpoint);
-        if ($cached_data) {
-            return json_decode($cached_data, true);
+        if (cloudbeds_cache_table_exists()) {
+            $cached_data = cloudbeds_cache_check($endpoint);
+            if ($cached_data) {
+                return json_decode($cached_data, true);
+            }
         }
 
         // The response is not cached or has expired, so we need to make a request.
         $res_body = json_decode(wp_remote_retrieve_body($res), true);
         if ($res_body['success']) {
+            cloudbeds_cache_update_row($endpoint, wp_json_encode($res_body['data']));
             return $res_body['data'];
         }
     }
@@ -55,20 +58,29 @@ function cloudbeds_api_post($path = '', $args = []) {
     $endpoint = "https://hotels.cloudbeds.com/api/v1.1/$path";
     $token = get_option('cloudbeds_access_token');
 
-    if ($token) {
-        $args['headers'] = "Authorization: " . $token;
-        $res = wp_remote_post($endpoint, $args);  
-        
-        if (is_wp_error($res)) {
-            return false;
-        }
-        
-        $res_body = json_decode(wp_remote_retrieve_body($res), true);
-
-        if ($res_body['success']) {
-            return $res_body['data'];
-        }
+    if (!empty($args['headers'])) {
+        $args['headers'] = [];
     }
 
-    return false;
+    if ($token) {
+        $args['headers'][] = "Authorization: " . $token;
+    }
+    
+    $res = wp_remote_post($endpoint, $args);  
+    
+    if ( defined( 'WP_CLI' ) && WP_CLI ) {
+        WP_CLI::log(wp_json_encode($res));
+    }
+
+    if (CLOUDBEDS_DEBUG) {
+        cloudbeds_log("CLOUDBEDS RESPONSE FOR POST REQUEST ENDPOINT: $endpoint");
+        cloudbeds_log(wp_json_encode($res));
+    }
+
+    if (is_wp_error($res)) {
+        return false;
+    }
+    
+    $res_body = json_decode(wp_remote_retrieve_body($res), true);
+    return $res_body;
 }

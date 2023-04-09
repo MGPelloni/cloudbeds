@@ -97,6 +97,10 @@ function cloudbeds_auth() {
         wp_send_json_error(new WP_Error('500', 'Invalid nonce.'));
     }
 
+    if (CLOUDBEDS_DEBUG) {
+        cloudbeds_log("Retrieved authorization code from Cloudbeds: $code");
+    }
+
     cloudbeds_set_option('cloudbeds_authorization_code', $code);
     cloudbeds_set_option('cloudbeds_status', 'Connected');
     wp_redirect(CLOUDBEDS_ADMIN_URL);

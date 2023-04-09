@@ -41,6 +41,11 @@ function cloudbeds_get_authorization_code($client_id, $nonce) {
         'state' => $nonce
     ]);
 
+    if (CLOUDBEDS_DEBUG) {
+        cloudbeds_log("Retrieving authorization code from Cloudbeds..");
+        cloudbeds_log("Redirecting to: " . $endpoint . "?" . $query . ". Client ID: " . $client_id . ". Nonce: " . $nonce . ".");
+    }
+    
     wp_redirect($endpoint . "?" . $query);
     exit;
 }
@@ -57,6 +62,7 @@ function cloudbeds_get_access_token() {
     }
 
     $data = cloudbeds_option_data();
+    $args = [];
 
     if (!$data['cloudbeds_client_id']) {
         return "Missing client ID.";
@@ -83,7 +89,7 @@ function cloudbeds_get_access_token() {
     }
 
     if ($token['grant_type'] == 'refresh_token') {
-        $args = [
+        $args['body'] = [
             'client_id' => $data['cloudbeds_client_id'],
             'client_secret' => $data['cloudbeds_client_secret'],
             'refresh_token' => $token['code'],
@@ -91,7 +97,7 @@ function cloudbeds_get_access_token() {
             'redirect_uri' => rest_url('/cloudbeds/auth'),
         ];
     } else {
-        $args = [
+        $args['body'] = [
             'client_id' => $data['cloudbeds_client_id'],
             'client_secret' => $data['cloudbeds_client_secret'],
             'code' => $token['code'],
@@ -99,6 +105,10 @@ function cloudbeds_get_access_token() {
             'redirect_uri' => rest_url('/cloudbeds/auth'),
         ];
     }
+
+    $args['headers'] = [
+        'Content-Type' => 'multipart/form-data'
+    ];
 
     $res = cloudbeds_api_post('access_token', $args);
 

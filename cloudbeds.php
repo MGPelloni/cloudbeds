@@ -32,6 +32,7 @@ define('CLOUDBEDS_DATA_KEYS', [
     'cloudbeds_status'
 ]);
 define('CLOUDBEDS_LOGS', CLOUDBEDS_PLUGIN_PATH . 'logs');
+define('CLOUDBEDS_DEBUG', false);
 
 // Functions
 require_once(CLOUDBEDS_PLUGIN_PATH . 'src/php/admin.php');

@@ -107,3 +107,12 @@ function cloudbeds_cache_table_exists() {
 
     return false;
 }
+
+/**
+ * Retrieves all Cloudbeds table data to be used in the admin panel.
+ */
+function cloudbeds_cache_retrieve_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'cloudbeds_cache';
+    return $wpdb->get_results( "SELECT * FROM $table_name" );
+}
