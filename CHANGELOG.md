@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.1](https://github.com/MGPelloni/cloudbeds/compare/v1.2.0...v1.2.1) (2023-04-09)
+
+
+### Bug Fixes
+
+* **api:** remove double json_encode ([d49f4a8](https://github.com/MGPelloni/cloudbeds/commit/d49f4a84fbb78d606759a8f21e632c7bbb960b37))
+
 # [1.2.0](https://github.com/MGPelloni/cloudbeds/compare/v1.1.0...v1.2.0) (2023-04-09)
 
 
