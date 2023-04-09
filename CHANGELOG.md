@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.3](https://github.com/MGPelloni/cloudbeds/compare/v1.2.2...v1.2.3) (2023-04-09)
+
+
+### Bug Fixes
+
+* if new key is present, use over cached ([a2877b2](https://github.com/MGPelloni/cloudbeds/commit/a2877b2964298dcc214af25c67fdc78e94d99402))
+
 ## [1.2.2](https://github.com/MGPelloni/cloudbeds/compare/v1.2.1...v1.2.2) (2023-04-09)
 
 
