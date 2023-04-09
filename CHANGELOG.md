@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.2.0](https://github.com/MGPelloni/cloudbeds/compare/v1.1.0...v1.2.0) (2023-04-09)
+
+
+### Features
+
+* caching ([f5963a9](https://github.com/MGPelloni/cloudbeds/commit/f5963a92bb135eb7f95db85ae1a0282b4c41cec4))
+
 # [1.1.0](https://github.com/MGPelloni/cloudbeds/compare/v1.0.1...v1.1.0) (2023-03-16)
 
 
