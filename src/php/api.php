@@ -37,7 +37,7 @@ function cloudbeds_api_get($path = '', $args = []) {
         // The response is not cached or has expired, so we need to make a request.
         $res_body = json_decode(wp_remote_retrieve_body($res), true);
         if ($res_body['success']) {
-            cloudbeds_cache_update_row($endpoint, wp_json_encode($res_body['data']));
+            cloudbeds_cache_update_row($endpoint, $res_body['data']);
             return $res_body['data'];
         }
     }
@@ -82,5 +82,10 @@ function cloudbeds_api_post($path = '', $args = []) {
     }
     
     $res_body = json_decode(wp_remote_retrieve_body($res), true);
+
+    if (CLOUDBEDS_DEBUG) {
+        cloudbeds_log("RES BODY: " . wp_remote_retrieve_body($res));
+    }
+
     return $res_body;
 }
