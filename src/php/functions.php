@@ -115,10 +115,9 @@ function cloudbeds_import_data($target_site = null, $key = null) {
 
     if (!$key && !get_option('cloudbeds_sync_key')) {
         return 'Missing key.';
-    } else if (get_option('cloudbeds_sync_key')) {
+    } else if (!$key && get_option('cloudbeds_sync_key')) {
         $key = get_option('cloudbeds_sync_key');
     }
-
 
     $query = http_build_query([
         'key' => $key
@@ -134,7 +133,7 @@ function cloudbeds_import_data($target_site = null, $key = null) {
         $res = json_decode(wp_remote_retrieve_body($res), true);
     }
 
-    if (!$res['cloudbeds_client_id']) {
+    if (empty($res['cloudbeds_client_id'])) {
         return false;
     } else {
         $data = cloudbeds_option_data();
