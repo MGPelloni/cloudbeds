@@ -116,11 +116,30 @@ function cloudbeds_get_access_token() {
         WP_CLI::log(wp_json_encode($res));
     }
 
-    if ($res['error_description']) {
+    $time_left = ceil(((intval($data['cloudbeds_access_token_timestamp']) + 1800) - time()) / 60);
+
+    if (empty($res) && $time_left < -30) {
+        cloudbeds_set_option('cloudbeds_status', "The plugin must be reconnected to the Cloudbeds API.");
+
+        // Delete specific options, retain data for reconnection
+        delete_option('cloudbeds_authorization_code');
+        delete_option('cloudbeds_access_token');
+        delete_option('cloudbeds_access_token_timestamp');
+        delete_option('cloudbeds_refresh_token');
+        delete_option('cloudbeds_data_key');
+
+        // Email admin
+        $message = "The Cloudbeds API plugin is experiencing an error. Please reconnect the plugin to the Cloudbeds API. \n\n";
+        $message .= "Click here to reconnect: " . admin_url('options-general.php?page=cloudbeds') . "\n\n";
+
+        cloudbeds_admin_email("The Cloudbeds API plugin is experiencing an error.", $message);
+    }
+
+    if (!empty($res['error_description'])) {
         cloudbeds_set_option('cloudbeds_status', $res['error_description']);
     }
 
-    if ($res['access_token']) {
+    if (!empty($res['access_token'])) {
         cloudbeds_set_option('cloudbeds_access_token', $res['access_token']);
         cloudbeds_set_option('cloudbeds_access_token_timestamp', time());
         
@@ -129,7 +148,7 @@ function cloudbeds_get_access_token() {
         }
     }
 
-    if ($res['refresh_token']) {
+    if (!empty($res['refresh_token'])) {
         cloudbeds_set_option('cloudbeds_refresh_token', $res['refresh_token']);
 
         if ( defined( 'WP_CLI' ) && WP_CLI ) {

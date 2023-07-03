@@ -195,3 +195,14 @@ function cloudbeds_sync_connect() {
         return "Sync failed, double check the data key and website URL.";
     }
 }
+
+/**
+ * Sends an error email to the site administrator.
+ */
+function cloudbeds_admin_email($subject, $message) {
+    if (get_option('cloudbeds_admin_email')) {
+        $to = get_option('cloudbeds_admin_email');
+        $headers = array('Content-Type: text/html; charset=UTF-8');
+        wp_mail($to, $subject, $message, $headers);
+    }
+}
