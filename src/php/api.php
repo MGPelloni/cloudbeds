@@ -61,10 +61,6 @@ function cloudbeds_api_post($path = '', $args = []) {
     if (!empty($args['headers'])) {
         $args['headers'] = [];
     }
-
-    if ($token) {
-        $args['headers'][] = "Authorization: " . $token;
-    }
     
     $res = wp_remote_post($endpoint, $args);  
     
@@ -74,7 +70,8 @@ function cloudbeds_api_post($path = '', $args = []) {
 
     if (CLOUDBEDS_DEBUG) {
         cloudbeds_log("CLOUDBEDS RESPONSE FOR POST REQUEST ENDPOINT: $endpoint");
-        cloudbeds_log(wp_json_encode($res));
+        cloudbeds_log("ARGUMENTS: " . wp_json_encode($args));
+        cloudbeds_log("RESPONSE: " . wp_json_encode($res));
     }
 
     if (is_wp_error($res)) {
