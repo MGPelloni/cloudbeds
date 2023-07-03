@@ -21,6 +21,7 @@ define('CLOUDBEDS_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 define('CLOUDBEDS_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 define('CLOUDBEDS_ADMIN_URL', get_admin_url(null, '/options-general.php?page=cloudbeds'));
 define('CLOUDBEDS_ADMIN_SYNC_URL', get_admin_url(null, '/options-general.php?page=cloudbeds-sync'));
+define('CLOUDBEDS_ADMIN_SETTINGS_URL', get_admin_url(null, '/options-general.php?page=cloudbeds-settings'));
 define('CLOUDBEDS_DATA_KEYS', [
     'cloudbeds_client_id', 
     'cloudbeds_client_secret', 
@@ -29,7 +30,8 @@ define('CLOUDBEDS_DATA_KEYS', [
     'cloudbeds_access_token_timestamp', 
     'cloudbeds_refresh_token',
     'cloudbeds_data_key',
-    'cloudbeds_status'
+    'cloudbeds_status',
+    'cloudbeds_admin_email'
 ]);
 define('CLOUDBEDS_LOGS', CLOUDBEDS_PLUGIN_PATH . 'logs');
 define('CLOUDBEDS_DEBUG', false);
@@ -60,6 +62,7 @@ add_action('admin_init', 'cloudbeds_admin_register_settings');
 add_action('rest_api_init', 'cloudbeds_route_connect');
 add_action('rest_api_init', 'cloudbeds_route_auth');
 add_action('rest_api_init', 'cloudbeds_route_data');
+add_action('rest_api_init', 'cloudbeds_route_settings');
 
 // Hooks [Activation, Deactivation]
 register_activation_hook(__FILE__, 'cloudbeds_activate');

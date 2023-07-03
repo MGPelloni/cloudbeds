@@ -40,6 +40,19 @@ function cloudbeds_route_data(){
 }
 
 /**
+ * Registers an REST route to submit misc data from WordPress admin.
+ *
+ * @return void
+ */
+function cloudbeds_route_settings(){
+    register_rest_route( 'cloudbeds', '/settings/', array(
+        'methods' => 'POST',
+        'callback' => 'cloudbeds_settings',
+        'permission_callback' => '__return_true'
+    ));
+}
+
+/**
  * Callback function for /wp-json/cloudbeds/connect/ route.
  * 
  * Registers the Client ID and Secret to the WordPress database. Once logged, the user is forwarded
@@ -126,5 +139,30 @@ function cloudbeds_data() {
     }
 
     echo wp_json_encode($data); 
+    exit;
+}
+
+
+/**
+ * Callback function for /wp-json/cloudbeds/settings/ route.
+ * 
+ * Registers settings to the WordPress database.
+ *
+ * @return void
+ */
+function cloudbeds_settings() {
+    if (empty($_POST['_wpnonce'])) {
+        wp_send_json_error(new WP_Error('500', 'Missing nonce.'));
+    }
+
+    $admin_email = filter_var($_POST['cloudbeds_admin_email'], FILTER_SANITIZE_STRING);
+    $nonce = filter_var($_POST['_wpnonce'], FILTER_SANITIZE_STRING);
+   
+    if (!wp_verify_nonce($nonce, 'wp_rest')) {
+        wp_send_json_error(new WP_Error('500', 'Invalid nonce.'));
+    }
+
+    cloudbeds_set_option('cloudbeds_admin_email', $admin_email);
+    wp_redirect(CLOUDBEDS_ADMIN_SETTINGS_URL);
     exit;
 }

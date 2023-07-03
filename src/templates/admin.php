@@ -7,6 +7,14 @@ $data = cloudbeds_option_data();
 ?>
 
 <section class="cloudbeds-admin _container">
+    <nav>
+        <ul>
+            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds')) ?>">Cloudbeds</a></li>
+            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-cache')) ?>">Cache</a></li>
+            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-sync')) ?>">Sync</a></li>
+            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-settings')) ?>">Settings</a></li>
+        </ul>
+    </nav>
     <main class="cloudbeds-main">
         <div class="cloudbeds-grid">
             <div class="cloudbeds-form">
@@ -16,6 +24,10 @@ $data = cloudbeds_option_data();
                 </header>
                 <form method="post" action="<?= esc_url(rest_url('/cloudbeds/connect')) ?>"> 
                     <?php wp_nonce_field('wp_rest', '_wpnonce', false); ?>
+                    <?php if ($data['cloudbeds_status'] == "The plugin must be reconnected to the Cloudbeds API."): ?>
+                        <input type="hidden" name="cloudbeds_client_id" value="<?= esc_attr(get_option('cloudbeds_client_id')); ?>">
+                        <input type="hidden" name="cloudbeds_client_secret" value="<?= esc_attr(get_option('cloudbeds_client_secret')); ?>">
+                    <?php else: ?>
                     <div>
                         <label>Client ID:</label>
                         <input type="text" name="cloudbeds_client_id" value="<?= esc_attr(get_option('cloudbeds_client_id')); ?>">
@@ -24,6 +36,7 @@ $data = cloudbeds_option_data();
                         <label>Client Secret:</label>
                         <input type="text" name="cloudbeds_client_secret" value="">
                     </div>
+                    <?php endif; ?>
                     <input type="submit" value="Connect to Cloudbeds">
                 </form>
             </div>
@@ -44,7 +57,7 @@ $data = cloudbeds_option_data();
                             <tbody>
                                 <?php
                                     foreach (cloudbeds_option_data() as $key => $value):
-                                        if ($key == 'cloudbeds_client_secret') {
+                                        if ($key == 'cloudbeds_client_secret' || $key == 'cloudbeds_admin_email') {
                                             continue;
                                         }
                                 ?>

@@ -7,6 +7,14 @@ $table = cloudbeds_cache_retrieve_table();
 ?>
 
 <section class="cloudbeds-admin _container">
+    <nav>
+        <ul>
+            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds')) ?>">Cloudbeds</a></li>
+            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-cache')) ?>">Cache</a></li>
+            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-sync')) ?>">Sync</a></li>
+            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-settings')) ?>">Settings</a></li>
+        </ul>
+    </nav>
     <main class="cloudbeds-main">
         <header class="cloudbeds-header">
             <h1>Cloudbeds</h1>
