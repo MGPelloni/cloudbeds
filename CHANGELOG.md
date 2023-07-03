@@ -1,5 +1,18 @@
 # Semantic Versioning Changelog
 
+# [1.3.0](https://github.com/MGPelloni/cloudbeds/compare/v1.2.3...v1.3.0) (2023-07-03)
+
+
+### Bug Fixes
+
+* **api:** remove sending headers on refresh_token ([19a433e](https://github.com/MGPelloni/cloudbeds/commit/19a433e7e83405866b710e8b28d29c9d72804a7f))
+
+
+### Features
+
+* **admin:** email notifications on error ([144d284](https://github.com/MGPelloni/cloudbeds/commit/144d284e081a0b11b93c7ccb46c345125304f49b))
+* **admin:** settings option page ([59afd7f](https://github.com/MGPelloni/cloudbeds/commit/59afd7f5e3e17d8ff1a0a19beba1192f0e8c3a62))
+
 ## [1.2.3](https://github.com/MGPelloni/cloudbeds/compare/v1.2.2...v1.2.3) (2023-04-09)
 
 
