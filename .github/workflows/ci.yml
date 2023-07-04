@@ -55,7 +55,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create plugin artifact
-        run: mkdir cloudbeds
+        run: |
+          mkdir cloudbeds
           rsync -avr . './cloudbeds' --exclude 'cloudbeds' --exclude 'node_modules/'
           zip -X -r cloudbeds.zip cloudbeds -x '*.git*' '*.github*' node_modules/\* vendor/\* src/scss\* src/js\* .* "*/\.*" CHANGELOG.md composer.json composer.lock gulpfile.js LICENSE package.json package-lock.json cloudbeds.json
       - name: Upload plugin to remote
