@@ -69,7 +69,8 @@ function cloudbeds_api_post($path = '', $args = []) {
     }
 
     if (CLOUDBEDS_DEBUG) {
-        cloudbeds_log("CLOUDBEDS RESPONSE FOR POST REQUEST ENDPOINT: $endpoint");
+        cloudbeds_log("\n\ncloudbeds_api_post() - " . wp_date('Y-m-d H:i:s'));
+        cloudbeds_log("ENDPOINT: $endpoint");
         cloudbeds_log("ARGUMENTS: " . wp_json_encode($args));
         cloudbeds_log("RESPONSE: " . wp_json_encode($res));
     }
@@ -81,7 +82,7 @@ function cloudbeds_api_post($path = '', $args = []) {
     $res_body = json_decode(wp_remote_retrieve_body($res), true);
 
     if (CLOUDBEDS_DEBUG) {
-        cloudbeds_log("RES BODY: " . wp_remote_retrieve_body($res));
+        cloudbeds_log("RESPONSE BODY: " . wp_remote_retrieve_body($res));
     }
 
     return $res_body;

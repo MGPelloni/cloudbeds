@@ -42,6 +42,7 @@ function cloudbeds_get_authorization_code($client_id, $nonce) {
     ]);
 
     if (CLOUDBEDS_DEBUG) {
+        cloudbeds_log("\n\ncloudbeds_get_authorization_code() - " . wp_date('Y-m-d H:i:s'));
         cloudbeds_log("Retrieving authorization code from Cloudbeds..");
         cloudbeds_log("Redirecting to: " . $endpoint . "?" . $query . ". Client ID: " . $client_id . ". Nonce: " . $nonce . ".");
     }

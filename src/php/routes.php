@@ -111,6 +111,7 @@ function cloudbeds_auth() {
     }
 
     if (CLOUDBEDS_DEBUG) {
+        cloudbeds_log("\n\ncloudbeds_auth() - " . wp_date('Y-m-d H:i:s'));
         cloudbeds_log("Retrieved authorization code from Cloudbeds: $code");
     }
 
