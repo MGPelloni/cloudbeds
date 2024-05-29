@@ -83,11 +83,23 @@ function cloudbeds_admin_register_settings() {
  * @return void
  */
 function cloudbeds_log($data) {
+    if (CLOUDBEDS_DEBUG !== true) {
+        return;
+    }
+    
+    if (!is_dir(CLOUDBEDS_LOGS)) {
+        mkdir(CLOUDBEDS_LOGS);
+    }
+
     $content = $data;
     $date = date('mdy');
     $path = CLOUDBEDS_LOGS . '/' . $date . '.txt';
 
     if (!file_exists($path)) {
+        if (!is_dir(CLOUDBEDS_LOGS)) {
+            return;
+        }
+        
         touch($path);
     }
 
