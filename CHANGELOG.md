@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.3.1](https://github.com/MGPelloni/cloudbeds/compare/v1.3.0...v1.3.1) (2024-05-29)
+
+
+### Bug Fixes
+
+* unable to open file bug ([b136c4f](https://github.com/MGPelloni/cloudbeds/commit/b136c4f2753157d253b959d9e6fa334da132032c))
+
 # [1.3.0](https://github.com/MGPelloni/cloudbeds/compare/v1.2.3...v1.3.0) (2023-07-03)
 
 
