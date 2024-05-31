@@ -33,9 +33,8 @@ jobs:
           with:
             paths: '.' # Paths to check, space separated
             excludes: 'lib' # Paths to excludes, space separated
-            standard: 'WordPress-VIP-Go' # Standard to use. Accepts WordPress|WordPress-Core|WordPress-Docs|WordPress-Extra|WordPress-VIP-Go|WordPressVIPMinimum.
+            standard: 'WordPress' # Standard to use. Accepts WordPress|WordPress-Core|WordPress-Docs|WordPress-Extra|WordPress-VIP-Go|WordPressVIPMinimum.
             repo_branch: 'main' # Branch of Standard repository
-            use_local_config: 'true' # Use local standard
             extra_args: '--report-json=./phpcs.json' # Extra arguments passing to the command
         - name: Update summary
           run: |
