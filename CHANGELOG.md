@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.3.8](https://github.com/MGPelloni/cloudbeds/compare/v1.3.7...v1.3.8) (2024-05-31)
+
+
+### Bug Fixes
+
+* adjust standard from WordPress-VIP-Go -> WordPress ([53ab8bf](https://github.com/MGPelloni/cloudbeds/commit/53ab8bf42f7781ce7cd848e47502400b84162544))
+
 ## [1.3.7](https://github.com/MGPelloni/cloudbeds/compare/v1.3.6...v1.3.7) (2024-05-31)
 
 
