@@ -88,7 +88,7 @@ function cloudbeds_log($data) {
     }
 
     $content = $data;
-    $date = date('mdy');
+    $date = wp_date('mdy');
     $path = CLOUDBEDS_LOGS . '/' . $date . '.txt';
 
     if (!file_exists($path)) {

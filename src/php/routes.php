@@ -156,7 +156,7 @@ function cloudbeds_settings() {
         wp_send_json_error(new WP_Error('500', 'Missing nonce.'));
     }
 
-    $admin_email = filter_var($_POST['cloudbeds_admin_email'], FILTER_SANITIZE_STRING);
+    $admin_email = isset($_POST['cloudbeds_admin_email']) ? filter_var($_POST['cloudbeds_admin_email'], FILTER_SANITIZE_STRING) : '';
     $nonce = filter_var($_POST['_wpnonce'], FILTER_SANITIZE_STRING);
    
     if (!wp_verify_nonce($nonce, 'wp_rest')) {

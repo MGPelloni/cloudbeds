@@ -41,7 +41,7 @@ $table = cloudbeds_cache_retrieve_table();
 
                                 // Calculate the timestamp in a human readable format.
                                 if ($key == 'timestamp' && $value != 0) {
-                                    $readable_time = date('F j, Y g:ia', $value);
+                                    $readable_time = wp_date('F j, Y g:ia', $value);
                                     $seconds_left = 86400 - (time() - $value);
 
                                     if ($seconds_left < 0) {

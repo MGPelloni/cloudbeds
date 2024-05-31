@@ -90,7 +90,8 @@ function cloudbeds_cache_update_row($url, $response) {
 function cloudbeds_cache_get_row($url) {
     global $wpdb;
     $table_name = $wpdb->prefix . 'cloudbeds_cache';
-    return $wpdb->get_row( "SELECT * FROM $table_name WHERE url = '$url'" );
+    $query = $wpdb->prepare( "SELECT * FROM $table_name WHERE url = %s", $url );
+    return $wpdb->get_row( $query );
 }
 
 /**
@@ -101,7 +102,8 @@ function cloudbeds_cache_get_row($url) {
 function cloudbeds_cache_table_exists() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'cloudbeds_cache';
-    if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) == $table_name ) {
+    $query = $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name );
+    if ( $wpdb->get_var( $query ) == $table_name ) {
         return true;
     } 
 
@@ -114,5 +116,6 @@ function cloudbeds_cache_table_exists() {
 function cloudbeds_cache_retrieve_table() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'cloudbeds_cache';
-    return $wpdb->get_results( "SELECT * FROM $table_name" );
+    $query = $wpdb->prepare( "SELECT * FROM %s", $table_name );
+    return $wpdb->get_results( $query );
 }
