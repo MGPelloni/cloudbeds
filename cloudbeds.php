@@ -9,7 +9,7 @@ License:     GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Version number is automatically adjusted by semantic-release-bot on release, do not adjust manually:
-Version: 1.3.1
+Version: 1.3.2
 */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.3.2](https://github.com/MGPelloni/cloudbeds/compare/v1.3.1...v1.3.2) (2024-05-31)
+
+
+### Bug Fixes
+
+* filesystem writes are forbidden, please do not use mkdir() ([af46738](https://github.com/MGPelloni/cloudbeds/commit/af4673817b71c0aed77ad9fd735e40138e0d3102))
+
 ## [1.3.1](https://github.com/MGPelloni/cloudbeds/compare/v1.3.0...v1.3.1) (2024-05-29)
 
 
