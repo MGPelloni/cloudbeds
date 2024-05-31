@@ -53,6 +53,10 @@ $data = cloudbeds_option_data();
                                         if ($key == 'cloudbeds_client_secret' || $key == 'cloudbeds_admin_email') {
                                             continue;
                                         }
+
+                                        if ($data['cloudbeds_status'] == 'Syncing to Production' && $key == 'cloudbeds_data_key') {
+                                            continue;
+                                        }
                                 ?>
                                 <tr>
                                     <td>

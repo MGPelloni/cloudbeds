@@ -41,25 +41,6 @@ function cloudbeds_reset() {
 }
 
 /**
- * Activation callback for the Cloudbeds plugin.
- *
- * @return void
- */
-function cloudbeds_activate() {
-    if (!wp_next_scheduled('cloudbeds_cron')) {
-        wp_schedule_event(time(), 'thirty_minutes', 'cloudbeds_cron');
-    }
-
-    if (!get_option('cloudbeds_data_key')) {
-        cloudbeds_set_option('cloudbeds_data_key', wp_generate_password(30, false));
-    }
-    
-    if ( !cloudbeds_cache_table_exists() ) {
-        cloudbeds_cache_create_table();
-    }
-}
-
-/**
  * Deactivation callback for the Cloudbeds plugin.
  *
  * @return void
@@ -176,9 +157,9 @@ function cloudbeds_sync_connect() {
         return false;
     }
 
-    $website = filter_var($_POST['target_website'], FILTER_SANITIZE_STRING); 
-    $key = filter_var($_POST['data_key'], FILTER_SANITIZE_STRING);
-    $nonce = filter_var($_POST['_wpnonce'], FILTER_SANITIZE_STRING);
+    $website = sanitize_text_field($_POST['target_website']); 
+    $key = sanitize_text_field($_POST['data_key']);
+    $nonce = sanitize_text_field($_POST['_wpnonce']);
 
     if (!wp_verify_nonce($nonce, 'cloudbeds_sync')) {
         return 'Invalid nonce.';

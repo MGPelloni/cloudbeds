@@ -1,5 +1,22 @@
 <?php
 /**
+ * Initialization callback for the Cloudbeds plugin.
+ */
+function cloudbeds_admin_init() {
+    if (!wp_next_scheduled('cloudbeds_cron')) {
+        wp_schedule_event(time(), 'thirty_minutes', 'cloudbeds_cron');
+    }
+
+    if (!get_option('cloudbeds_data_key')) {
+        cloudbeds_set_option('cloudbeds_data_key', wp_generate_password(30, false));
+    }
+    
+    if ( !cloudbeds_cache_table_exists() ) {
+        cloudbeds_cache_create_table();
+    }
+}
+
+/**
  * Enqueues styles for Cloudbeds admin pages.
  * 
  * @link https://developer.wordpress.org/themes/basics/including-css-javascript/

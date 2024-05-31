@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 define('CLOUDBEDS_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 define('CLOUDBEDS_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 define('CLOUDBEDS_ADMIN_URL', get_admin_url(null, '/options-general.php?page=cloudbeds'));
-define('CLOUDBEDS_ADMIN_SYNC_URL', get_admin_url(null, '/options-general.php?page=cloudbeds-sync'));
-define('CLOUDBEDS_ADMIN_SETTINGS_URL', get_admin_url(null, '/options-general.php?page=cloudbeds-settings'));
+define('CLOUDBEDS_ADMIN_SYNC_URL', get_admin_url(null, '/options.php?page=cloudbeds-sync'));
+define('CLOUDBEDS_ADMIN_SETTINGS_URL', get_admin_url(null, '/options.php?page=cloudbeds-settings'));
 define('CLOUDBEDS_DATA_KEYS', [
     'cloudbeds_client_id', 
     'cloudbeds_client_secret', 
@@ -52,11 +52,11 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
 // Hooks [Initialization]
 add_action('init', 'cloudbeds_check_access_token');
-add_action('init', 'cloudbeds_activate');
 
 // Hooks [Administration]
 add_action('admin_enqueue_scripts', 'cloudbeds_admin_styles');
 add_action('admin_menu', 'cloudbeds_admin_custom_menu');
+add_action('admin_init', 'cloudbeds_admin_init');
 add_action('admin_init', 'cloudbeds_admin_register_settings');
 
 // Hooks [WordPress REST API]
@@ -66,7 +66,6 @@ add_action('rest_api_init', 'cloudbeds_route_data');
 add_action('rest_api_init', 'cloudbeds_route_settings');
 
 // Hooks [Activation, Deactivation]
-register_activation_hook(__FILE__, 'cloudbeds_activate');
 register_deactivation_hook(__FILE__, 'cloudbeds_deactivate'); 
 
 // Filters
@@ -74,11 +73,11 @@ add_filter('cron_schedules', 'cloudbeds_cron_schedules');
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'cloudbeds_action_links' );
 
 // Updates
-// require_once(CLOUDBEDS_PLUGIN_PATH . 'lib/plugin-update-checker-5.0/plugin-update-checker.php');
-// use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+require_once(CLOUDBEDS_PLUGIN_PATH . 'lib/plugin-update-checker-5.0/plugin-update-checker.php');
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
-// $myUpdateChecker = PucFactory::buildUpdateChecker(
-// 	'https://marcopelloni.com/releases/cloudbeds.json',
-// 	__FILE__,
-// 	'cloudbeds'
-// );
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://marcopelloni.com/releases/cloudbeds.json',
+	__FILE__,
+	'cloudbeds'
+);
