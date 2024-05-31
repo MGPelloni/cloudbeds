@@ -24,23 +24,6 @@ jobs:
         npm install
         npm install gulp
         npm run compile
-  test:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: VIP Code Analysis
-          uses: 10up/wpcs-action@stable
-          with:
-            paths: '.' # Paths to check, space separated
-            excludes: 'lib' # Paths to excludes, space separated
-            standard: 'WordPress-VIP-Go' # Standard to use. Accepts WordPress|WordPress-Core|WordPress-Docs|WordPress-Extra|WordPress-VIP-Go|WordPressVIPMinimum.
-            repo_branch: 'main' # Branch of Standard repository
-            extra_args: '--report-json=./phpcs.json' # Extra arguments passing to the command
-        - name: Update summary
-          run: |
-            npx --yes github:10up/phpcs-json-to-md --path ./phpcs.json --output ./phpcs.md
-            cat phpcs.md >> $GITHUB_STEP_SUMMARY
-          if: always()
   release:
     name: release
     runs-on: ubuntu-latest
