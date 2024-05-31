@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.4.1](https://github.com/MGPelloni/cloudbeds/compare/v1.4.0...v1.4.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* **admin:** move activiation function to admin_init hook ([a6c9ddd](https://github.com/MGPelloni/cloudbeds/commit/a6c9ddddf77272a961d84a4c3bd558424b9d3cc2))
+
 # [1.4.0](https://github.com/MGPelloni/cloudbeds/compare/v1.3.2...v1.4.0) (2024-05-31)
 
 
