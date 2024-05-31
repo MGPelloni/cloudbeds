@@ -7,15 +7,8 @@ $data = cloudbeds_option_data();
 ?>
 
 <section class="cloudbeds-admin _container">
-    <nav>
-        <ul>
-            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds')) ?>">Cloudbeds</a></li>
-            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-cache')) ?>">Cache</a></li>
-            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-sync')) ?>">Sync</a></li>
-            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-settings')) ?>">Settings</a></li>
-        </ul>
-    </nav>
     <main class="cloudbeds-main">
+        <?php include CLOUDBEDS_PLUGIN_PATH . 'src/templates/template-part/navigation.php'; ?>
         <div class="cloudbeds-grid">
             <div class="cloudbeds-form">
                 <header class="cloudbeds-header">
@@ -63,10 +56,10 @@ $data = cloudbeds_option_data();
                                 ?>
                                 <tr>
                                     <td>
-                                        <?= esc_html($key) ?>
+                                        <?php echo esc_html($key) ?>
                                     </td>
                                     <td>
-                                        <?= esc_html($value) ?>
+                                        <?php echo esc_html($value) ?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

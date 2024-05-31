@@ -7,15 +7,8 @@ $table = cloudbeds_cache_retrieve_table();
 ?>
 
 <section class="cloudbeds-admin _container">
-    <nav>
-        <ul>
-            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds')) ?>">Cloudbeds</a></li>
-            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-cache')) ?>">Cache</a></li>
-            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-sync')) ?>">Sync</a></li>
-            <li><a href="<?= esc_url(admin_url('options-general.php?page=cloudbeds-settings')) ?>">Settings</a></li>
-        </ul>
-    </nav>
     <main class="cloudbeds-main">
+        <?php include CLOUDBEDS_PLUGIN_PATH . 'src/templates/template-part/navigation.php'; ?>
         <header class="cloudbeds-header">
             <h1>Cloudbeds</h1>
             <p>WordPress integration utilizing the Cloudbeds API.</p>
@@ -23,13 +16,20 @@ $table = cloudbeds_cache_retrieve_table();
         <div class="cloudbeds-info">
             <table class="widefat" cellspacing="0">
                 <thead>
-                    <?php foreach (array_keys(get_object_vars($table[0])) as $heading): 
-                        if ($heading == 'id' || $heading == 'response') {
-                            continue;
-                        }    
-                    ?>
-                        <th><?= esc_html($heading) ?></th>
-                    <?php endforeach; ?>
+                    <?php if (empty($table)): ?>
+                        <tr>
+                            <th>No data available</th>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach (array_keys(get_object_vars($table[0])) as $heading): 
+                            if ($heading == 'id' || $heading == 'response') {
+                                continue;
+                            }    
+                        ?>
+                            <th><?= esc_html($heading) ?></th>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </thead>
                 </thead>
                 <tbody>
                     <?php foreach ($table as $row): ?>

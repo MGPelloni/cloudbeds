@@ -18,9 +18,9 @@ function cloudbeds_admin_styles() {
  */
 function cloudbeds_admin_custom_menu() {
     add_submenu_page('options-general.php', 'Cloudbeds', 'Cloudbeds', 'manage_options', 'cloudbeds', 'cloudbeds_admin_options_page', 58);
-    add_submenu_page(null, 'Cloudbeds Sync', null, 'manage_options', 'cloudbeds-sync', 'cloudbeds_admin_sync_page', 58);
-    add_submenu_page(null, 'Cloudbeds Cache', null, 'manage_options', 'cloudbeds-cache', 'cloudbeds_admin_cache_page', 58);
-    add_submenu_page(null, 'Cloudbeds Settings', null, 'manage_options', 'cloudbeds-settings', 'cloudbeds_admin_settings_page', 58);
+    add_submenu_page('options.php', 'Cloudbeds Sync', 'Cloudbeds Sync', 'manage_options', 'cloudbeds-sync', 'cloudbeds_admin_sync_page', 58);
+    add_submenu_page('options.php', 'Cloudbeds Cache', 'Cloudbeds Cache', 'manage_options', 'cloudbeds-cache', 'cloudbeds_admin_cache_page', 58);
+    add_submenu_page('options.php', 'Cloudbeds Settings', 'Cloudbeds Settings', 'manage_options', 'cloudbeds-settings', 'cloudbeds_admin_settings_page', 58);
 }
 
 /**

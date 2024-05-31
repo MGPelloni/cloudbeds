@@ -23,5 +23,8 @@
     "gulp-rename": "^2.0.0",
     "gulp-uglify": "^3.0.2",
     "semantic-release": "^19.0.5"
+  },
+  "dependencies": {
+    "gulp": "^5.0.0"
   }
 }

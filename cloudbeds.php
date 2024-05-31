@@ -73,11 +73,11 @@ add_filter('cron_schedules', 'cloudbeds_cron_schedules');
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'cloudbeds_action_links' );
 
 // Updates
-require_once(CLOUDBEDS_PLUGIN_PATH . 'lib/plugin-update-checker-5.0/plugin-update-checker.php');
-use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+// require_once(CLOUDBEDS_PLUGIN_PATH . 'lib/plugin-update-checker-5.0/plugin-update-checker.php');
+// use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
-$myUpdateChecker = PucFactory::buildUpdateChecker(
-	'https://marcopelloni.com/releases/cloudbeds.json',
-	__FILE__,
-	'cloudbeds'
-);
+// $myUpdateChecker = PucFactory::buildUpdateChecker(
+// 	'https://marcopelloni.com/releases/cloudbeds.json',
+// 	__FILE__,
+// 	'cloudbeds'
+// );

@@ -1,5 +1,11 @@
 .cloudbeds-admin {
     box-sizing: border-box;
+
+    nav ul {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 0;
+    }
 }
 
 .cloudbeds-form {
@@ -31,7 +37,6 @@
     display: grid;
     grid-template-columns: 450px 1fr;
     grid-gap: 15px;
-    padding: 0 15px;
 
     @media (max-width: 800px) {
         grid-template-columns: 100%;
