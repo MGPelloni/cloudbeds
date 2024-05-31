@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.3.3](https://github.com/MGPelloni/cloudbeds/compare/v1.3.2...v1.3.3) (2024-05-31)
+
+
+### Bug Fixes
+
+* deprecated warnings for PHP 8.2 ([3d5cdd7](https://github.com/MGPelloni/cloudbeds/commit/3d5cdd7b94bd941cb0b4316fb887e28dae4b219e))
+
 ## [1.3.2](https://github.com/MGPelloni/cloudbeds/compare/v1.3.1...v1.3.2) (2024-05-31)
 
 
