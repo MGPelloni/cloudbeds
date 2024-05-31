@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.3.5](https://github.com/MGPelloni/cloudbeds/compare/v1.3.4...v1.3.5) (2024-05-31)
+
+
+### Bug Fixes
+
+* remove phpcs.json file from actions ([abd44c1](https://github.com/MGPelloni/cloudbeds/commit/abd44c1a747bc5806f319c8a0df6252415860c4b))
+
 ## [1.3.4](https://github.com/MGPelloni/cloudbeds/compare/v1.3.3...v1.3.4) (2024-05-31)
 
 
