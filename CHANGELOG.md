@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.3.4](https://github.com/MGPelloni/cloudbeds/compare/v1.3.3...v1.3.4) (2024-05-31)
+
+
+### Bug Fixes
+
+* show warnings, use local config file ([5fe968b](https://github.com/MGPelloni/cloudbeds/commit/5fe968b6288e1b4641400ddd05249ac9702bc9a8))
+
 ## [1.3.3](https://github.com/MGPelloni/cloudbeds/compare/v1.3.2...v1.3.3) (2024-05-31)
 
 
