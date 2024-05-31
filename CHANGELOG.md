@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.3.6](https://github.com/MGPelloni/cloudbeds/compare/v1.3.5...v1.3.6) (2024-05-31)
+
+
+### Bug Fixes
+
+* remove use_local_config from build ([87a4c1f](https://github.com/MGPelloni/cloudbeds/commit/87a4c1f7940d4e8d53c4b783821bd392f65f6c76))
+
 ## [1.3.5](https://github.com/MGPelloni/cloudbeds/compare/v1.3.4...v1.3.5) (2024-05-31)
 
 
