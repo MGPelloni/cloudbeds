@@ -52,6 +52,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
 // Hooks [Initialization]
 add_action('init', 'cloudbeds_check_access_token');
+add_action('init', 'cloudbeds_activate');
 
 // Hooks [Administration]
 add_action('admin_enqueue_scripts', 'cloudbeds_admin_styles');

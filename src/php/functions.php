@@ -53,6 +53,10 @@ function cloudbeds_activate() {
     if (!get_option('cloudbeds_data_key')) {
         cloudbeds_set_option('cloudbeds_data_key', wp_generate_password(30, false));
     }
+    
+    if ( !cloudbeds_cache_table_exists() ) {
+        cloudbeds_cache_create_table();
+    }
 }
 
 /**
@@ -62,6 +66,11 @@ function cloudbeds_activate() {
  */
 function cloudbeds_deactivate() {
     wp_unschedule_event(wp_next_scheduled('cloudbeds_cron'), 'cloudbeds_cron');
+
+    // Delete table
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'cloudbeds_cache';
+    $wpdb->query("DROP TABLE IF EXISTS $table_name");
 }
 
 /**

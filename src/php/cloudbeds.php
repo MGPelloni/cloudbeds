@@ -131,7 +131,7 @@ function cloudbeds_get_access_token() {
 
         // Email admin
         $message = "The Cloudbeds API plugin is experiencing an error. Please reconnect the plugin to the Cloudbeds API. \n\n";
-        $message .= "Click here to reconnect: " . admin_url('options-general.php?page=cloudbeds') . "\n\n";
+        $message .= "Click here to reconnect: " . admin_url('options.php?page=cloudbeds') . "\n\n";
 
         cloudbeds_admin_email("The Cloudbeds API plugin is experiencing an error.", $message);
     }
