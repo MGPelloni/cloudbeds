@@ -90,7 +90,7 @@ function cloudbeds_cache_update_row($url, $response) {
 function cloudbeds_cache_get_row($url) {
     global $wpdb;
     $table_name = $wpdb->prefix . 'cloudbeds_cache';
-    $query = $wpdb->prepare( "SELECT * FROM $table_name WHERE url = %s", $url );
+    $query = $wpdb->prepare( "SELECT * FROM {$table_name} WHERE url = %s", $url );
     return $wpdb->get_row( $query );
 }
 
