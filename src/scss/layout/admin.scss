@@ -67,4 +67,8 @@
 .cloudbeds-sync h4 {
     background: pink; 
     padding: 10px;
+
+    &.-success {
+        background: #e0ffe0;
+    }
 }

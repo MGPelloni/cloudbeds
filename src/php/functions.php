@@ -174,15 +174,13 @@ function cloudbeds_sync_connect() {
     // Both website and key are present, attempt to connect
     $data = cloudbeds_import_data($website, $key);
 
-    if ($data['cloudbeds_client_id']) {
+    if (!$data) {
+        return "Sync failed, double check the data key and website URL.";
+    } else if ($data['cloudbeds_client_id']) {
         cloudbeds_set_option('cloudbeds_sync_website', $website);
         cloudbeds_set_option('cloudbeds_sync_key', $key);
         cloudbeds_set_option('cloudbeds_status', 'Syncing to Production');
-        wp_redirect(CLOUDBEDS_ADMIN_URL);
-        exit;
-    } else {
-        cloudbeds_set_option('cloudbeds_status', 'Not Connected'); 
-        return "Sync failed, double check the data key and website URL.";
+        return "Sync successful!";
     }
 }
 
