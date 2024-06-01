@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.4.2](https://github.com/MGPelloni/cloudbeds/compare/v1.4.1...v1.4.2) (2024-06-01)
+
+
+### Bug Fixes
+
+* **sync:** remove wp_redirect, set success message ([1a44658](https://github.com/MGPelloni/cloudbeds/commit/1a44658caa6d805e5cc3d3ba25048c8fe954dabd))
+
 ## [1.4.1](https://github.com/MGPelloni/cloudbeds/compare/v1.4.0...v1.4.1) (2024-05-31)
 
 
