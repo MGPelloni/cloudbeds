@@ -107,10 +107,6 @@ function cloudbeds_get_access_token() {
         ];
     }
 
-    $args['headers'] = [
-        'Content-Type' => 'multipart/form-data'
-    ];
-
     $res = cloudbeds_api_post('access_token', $args);
 
     if ( defined( 'WP_CLI' ) && WP_CLI ) {
