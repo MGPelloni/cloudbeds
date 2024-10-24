@@ -97,6 +97,23 @@ if (isset($_GET['reset']) && $_GET['reset'] == 'true') {
                         <?php
                         break;
                 } ?>
+
+                <?php if (CLOUDBEDS_DEBUG): ?>
+                    <hr style="margin: 20px 0 10px;" />
+                    <h3>Debugging</h3>
+                    <pre>
+                        <?php print_r($data); ?>
+                    </pre>
+                    <h3>Logs</h3>
+                    <pre>
+                        <?php 
+                        $logs = glob(CLOUDBEDS_LOGS . '/*.log');
+                        foreach ($logs as $log) {
+                            echo file_get_contents($log);
+                        }
+                        ?>
+                    </pre>
+                <?php endif; ?>
             </div>
         </div>
     </main>
