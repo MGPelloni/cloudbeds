@@ -106,7 +106,7 @@ function cloudbeds_log($data) {
 
     $content = $data;
     $date = wp_date('mdy');
-    $path = CLOUDBEDS_LOGS . '/' . $date . '.txt';
+    $path = CLOUDBEDS_LOGS . '/' . $date . '.log';
 
     if (!file_exists($path)) {
         touch($path);
