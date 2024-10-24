@@ -1,5 +1,18 @@
 # Semantic Versioning Changelog
 
+# [1.6.0](https://github.com/MGPelloni/cloudbeds/compare/v1.5.0...v1.6.0) (2024-10-24)
+
+
+### Bug Fixes
+
+* **logs:** filetype .txt -> .log ([d867d9e](https://github.com/MGPelloni/cloudbeds/commit/d867d9e3063d336369eb9a39e57e104085ca07dc))
+
+
+### Features
+
+* add authorization token on post ([7e33e5e](https://github.com/MGPelloni/cloudbeds/commit/7e33e5e0d27cdbea450b7b49a2c3f8e80e5c180d))
+* debugging panel ([75cb67b](https://github.com/MGPelloni/cloudbeds/commit/75cb67b60d2c798da1adfc62b9a13e9f770fdc0b))
+
 # [1.5.0](https://github.com/MGPelloni/cloudbeds/compare/v1.4.2...v1.5.0) (2024-10-24)
 
 
