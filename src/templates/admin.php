@@ -4,11 +4,22 @@
  */
 
 $data = cloudbeds_option_data(); 
+$message = '';
+
+if (isset($_GET['reset']) && $_GET['reset'] == 'true') {
+    cloudbeds_reset();
+    $message = 'All Cloudbeds data has been reset.';
+}
 ?>
 
-<section class="cloudbeds-admin _container">
+<section class="cloudbeds-admin _container"> 
     <main class="cloudbeds-main">
         <?php include CLOUDBEDS_PLUGIN_PATH . 'src/templates/template-part/navigation.php'; ?>
+        <?php 
+        if ($message) {
+            echo "<div class='notice notice-success is-dismissible'><p>{$message}</p></div>";
+        }
+        ?>   
         <div class="cloudbeds-grid">
             <div class="cloudbeds-form">
                 <header class="cloudbeds-header">

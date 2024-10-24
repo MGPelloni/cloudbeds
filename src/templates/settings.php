@@ -23,6 +23,7 @@ $data = cloudbeds_option_data();
                     </div>
                     <input type="submit" value="Save Settings">
                 </form>
+                <a class="cloudbeds-reset" href="<?= esc_url(admin_url('options-general.php?page=cloudbeds&reset=true')) ?>">Reset all Cloudbeds data</a>
             </div>
             <div class="cloudbeds-info">
                 <h2>Cloudbeds Settings</h2>

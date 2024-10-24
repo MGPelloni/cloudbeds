@@ -57,11 +57,6 @@ function cloudbeds_api_get($path = '', $args = []) {
 function cloudbeds_api_post($path = '', $args = []) {
     $endpoint = "https://hotels.cloudbeds.com/api/v1.1/$path";
     $token = get_option('cloudbeds_access_token');
-
-    if (!empty($args['headers'])) {
-        $args['headers'] = [];
-    }
-    
     $res = wp_remote_post($endpoint, $args);  
     
     if ( defined( 'WP_CLI' ) && WP_CLI ) {
