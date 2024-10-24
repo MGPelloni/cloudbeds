@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.5.0](https://github.com/MGPelloni/cloudbeds/compare/v1.4.2...v1.5.0) (2024-10-24)
+
+
+### Features
+
+* reset cloudbeds data button ([78b2b1c](https://github.com/MGPelloni/cloudbeds/commit/78b2b1c180425dd36d1f7c9bd1f705b9e0213d6d))
+
 ## [1.4.2](https://github.com/MGPelloni/cloudbeds/compare/v1.4.1...v1.4.2) (2024-06-01)
 
 
