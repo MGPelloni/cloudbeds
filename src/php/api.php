@@ -10,7 +10,7 @@
  * @return void
  */
 function cloudbeds_api_get($path = '', $args = []) {
-    $endpoint = "https://hotels.cloudbeds.com/api/v1.1/$path";
+    $endpoint = "https://hotels.cloudbeds.com/api/v1.2/$path";
     $token = get_option('cloudbeds_access_token');
 
     if ($token) { 
@@ -55,7 +55,7 @@ function cloudbeds_api_get($path = '', $args = []) {
  * @return void
  */
 function cloudbeds_api_post($path = '', $args = []) {
-    $endpoint = "https://hotels.cloudbeds.com/api/v1.1/$path";
+    $endpoint = "https://hotels.cloudbeds.com/api/v1.2/$path";
     $token = get_option('cloudbeds_access_token');
 
     if (!isset($args['headers'])) {
