@@ -113,3 +113,36 @@ function cloudbeds_cache_retrieve_table() {
     $table_name = $wpdb->prefix . 'cloudbeds_cache';
     return $wpdb->get_results("SELECT * FROM $table_name");
 }
+
+/**
+ * Clears expired rows from the Cloudbeds cache table.
+ * Hooked into the existing 'cloudbeds_cron' WP-Cron event.
+ *
+ * Rows older than 24 hours (86400 seconds) are removed to prevent
+ * unbounded growth of the cache table.
+ *
+ * @return void
+ */
+function cloudbeds_cache_clear_expired() {
+    global $wpdb;
+
+    if ( !cloudbeds_cache_table_exists() ) {
+        return;
+    }
+
+    $table_name = $wpdb->prefix . 'cloudbeds_cache';
+    $expiry     = 86400; // 24 hours, matches cache TTL in cloudbeds_cache_check()
+    $threshold  = time() - $expiry;
+
+    // Delete any rows older than the threshold.
+    // `timestamp` is stored as a string; compare numerically.
+    $wpdb->query(
+        $wpdb->prepare(
+            "DELETE FROM $table_name WHERE CAST(timestamp AS UNSIGNED) < %d",
+            $threshold
+        )
+    );
+}
+
+// Run the cleanup on the existing Cloudbeds cron schedule.
+add_action('cloudbeds_cron', 'cloudbeds_cache_clear_expired');
